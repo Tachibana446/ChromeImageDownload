@@ -15,8 +15,8 @@ function download(tabclose = false) {
         for (const u of urls) {
             let result = /(.*?\/)*(.*)\.(.*)$/.exec(u.url)
             let ext = result[3]     // 拡張子
+            ext = ext.replace(/:.*$/, "").replace(/[*?"<>|]/, "")
             let filename = result[2] + "." + ext    // ファイル名
-
             console.log({ url: u.url, filename: filename })
             chrome.downloads.download({ url: u.url, filename: filename })
         }
